@@ -1,8 +1,8 @@
 ###
-GET http://localhost:3001/api/persons
+GET https://puhelinluettelo-backend-test.onrender.com/api/persons
 
 ###
-POST http://localhost:3001/api/persons
+POST https://puhelinluettelo-backend-test.onrender.com/api/persons
 Content-Type: application/json
 
 {
@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3001/api/persons
+POST https://puhelinluettelo-backend-test.onrender.com/api/persons
 Content-Type: application/json
 
 {
@@ -19,7 +19,7 @@ Content-Type: application/json
   "number": "0405412241"
 }
 ###
-POST http://localhost:3001/api/persons
+POST https://puhelinluettelo-backend-test.onrender.com/api/persons
 Content-Type: application/json
 
 {
@@ -27,10 +27,10 @@ Content-Type: application/json
   "number": ""
 }
 ###
-POST http://localhost:3001/api/persons
+POST https://puhelinluettelo-backend-test.onrender.com/api/persons
 Content-Type: application/json
 
 {
-  "name": "Valtteri Arino",
-  "number": ""
+  "name": "Testi Testi",
+  "number": "123123"
 }
