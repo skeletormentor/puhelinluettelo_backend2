@@ -12,8 +12,6 @@ app.use(morgan(
 ))
 app.use(express.static('dist'))
 
-let persons = []
-
 app.get('/api/persons', (request, response) => {
   Person.find({}).then((persons) => {
     response.json(persons)
@@ -36,34 +34,22 @@ app.get('/api/persons/:id', (request, response) => {
 })
 
 app.delete('/api/persons/:id', (request, response) => {
-  const id = request.params.id
-  persons = persons.filter(person => person.id !== id)
-  response.status(204).end()
+
 })
 
 app.post('/api/persons', (request, response) => {
-  let person = request.body
-  const id = Math.floor(Math.random() * 1000000).toString()
-  if (persons.map(p => p.name).includes(person.name)) {
-    response
-      .status(400)
-      .json({error: 'Name must be unique'})
-      .end()
-  } else if (person.number === ''){
-    response
-      .status(400)
-      .json({error: 'Number field is required'})
-      .end()
-  } else if (person.name === '') {
-    response
-      .status(400)
-      .json({error: 'Name field is required'})
-      .end()
-  } else {
-    person = {...person, id: id}
-    persons = [...persons, person]
-    response.json(person)
+  let body = request.body
+  if (!body) {
+    return response.status(400).json({error: 'content missing'})
   }
+  const person = new Person({
+    name: body.name,
+    number: body.number
+  })
+
+  person.save().then(savedPerson => {
+    response.json(savedPerson)
+  })
 })
 
 const PORT = process.env.PORT
