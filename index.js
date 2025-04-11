@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 
-require('dotenv').config();
+require('dotenv').config()
 
 app.use(express.static('dist'))
 app.use(express.json())
@@ -27,7 +27,7 @@ app.get('/api/persons/:id', (request, response, next) => {
       } else {
         response.status(404).end()
       }
-  })
+    })
     .catch(error => next(error))
 })
 
@@ -42,7 +42,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
 app.post('/api/persons', (request, response, next) => {
   let body = request.body
   if (!body) {
-    return response.status(400).json({error: 'content missing'})
+    return response.status(400).json({ error: 'content missing' })
   }
   const person = new Person({
     name: body.name,
@@ -56,7 +56,7 @@ app.post('/api/persons', (request, response, next) => {
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
-  const {name, number} = request.body
+  const { name, number } = request.body
 
   Person.findById(request.params.id)
     .then(person => {
@@ -75,9 +75,9 @@ app.put('/api/persons/:id', (request, response, next) => {
 
 const errorHandler = (error, request, response, next) => {
   if (error.name === 'CastError') {
-    response.status(400).send({error: "malformatted id"})
+    response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
-    response.status(400).send({error: error.message})
+    response.status(400).send({ error: error.message })
   }
   next(error)
 }

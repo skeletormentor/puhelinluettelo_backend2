@@ -8,7 +8,7 @@ if (process.argv.length < 3) {
 const password = encodeURIComponent(process.argv[2])
 const url = `mongodb+srv://skeletormentor:${password}@testi.msg5vbt.mongodb.net/phonebookApp?retryWrites=true&w=majority&appName=testi`
 
-mongoose.set("strictQuery", false)
+mongoose.set('strictQuery', false)
 mongoose.connect(url)
 
 const personSchema = new mongoose.Schema({
@@ -30,7 +30,7 @@ if (process.argv.length === 5) {
   })
 } else if (process.argv.length === 3) {
   Person.find({}).then(result => {
-    console.log("phonebook:")
+    console.log('phonebook:')
     result.forEach(person => {
       console.log(`${person.name} ${person.number}`)
     })
